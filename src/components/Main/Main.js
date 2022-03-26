@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import randomProgrammingLanguage from "./Words/index.js";
 import { images } from "./Images/index.js";
 
@@ -9,7 +9,6 @@ const Main = () => {
   const [mistake, setMistake] = useState(0);
   const [guessed, setGuessed] = useState(new Set([]));
   const [answer, setAnswer] = useState(randomProgrammingLanguage());
-  const [image, setImage] = useState(images[0]);
 
   const handleGuess = (event) => {
     let guess = event.target.value;
@@ -50,7 +49,7 @@ const Main = () => {
         <button onClick={handleReset}>Play again</button>
       </div>
     );
-  } 
+  }
 
   if (mistake >= maximumNumberOfWrongGuesses) {
     return (
