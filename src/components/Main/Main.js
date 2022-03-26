@@ -9,12 +9,10 @@ const Main = () => {
   const [guessed, setGuessed] = useState(new Set([]));
   const [answer, setAnswer] = useState(randomProgrammingLanguage());
 
-  console.log(randomProgrammingLanguage());
-
   const handleGuess = (event) => {
     let guess = event.target.value;
-    setGuessed((prevGuessed) => new Set([...prevGuessed, guess]));
-    setMistake((prevMistake) => prevMistake + 1);
+    setGuessed(new Set([...guessed, guess]));
+    setMistake(mistake + (answer.includes(guess) ? 0 : 1));
   };
 
   const guessedWord = () => {
@@ -43,31 +41,20 @@ const Main = () => {
     setAnswer(randomProgrammingLanguage());
   };
 
-  // const gameOver = this.state.mistake >= this.props.maxWrong;
-  // const isWinner = this.guessedWord().join("") === this.state.answer;
-  // let gameStat = this.generateButtons();
+  let gameStat = generateButtons();
 
-  // if (isWinner) {
-  //   gameStat = "You Won!!!"
-  // }
-
-  // if (gameOver) {
-  //   gameStat = "You Lost!!!"
-  // }
   if (guessedWord().join("") === answer) {
-    generateButtons("You Won!!!");
-    // return (
-    //   <div className="win">
-    //     <h1>You win!</h1>
-    //     <button onClick={handleReset}>Play again</button>
-    //   </div>
-    // );
-  }
-
-  if (mistake >= maximumNumberOfWrongGuesses) {
-    generateButtons("You Lost!!!");
+    gameStat = "You Won!!!";
     return (
-      <div className="lose">
+      <div>
+        <h1>You won!</h1>
+        <button onClick={handleReset}>Play Again</button>
+      </div>
+    );
+  } else if (mistake >= maximumNumberOfWrongGuesses) {
+    gameStat = "You Lost!!!";
+    return (
+      <div>
         <h1>You lose!</h1>
         <h3>The answer was: {answer}</h3>
         <button onClick={handleReset}>Play again</button>
