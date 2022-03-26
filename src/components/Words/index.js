@@ -29,10 +29,8 @@ const programmingLanguages = [
   "perl",
 ];
 
-const randomProgrammingLanguage = () => {
+export const randomProgrammingLanguage = () => {
   return programmingLanguages[
     Math.floor(Math.random() * programmingLanguages.length)
   ];
 };
-
-export default randomProgrammingLanguage;
